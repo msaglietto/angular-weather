@@ -1,0 +1,35 @@
+<div layout="column">
+  <h1>Weather Forecast for
+    {{forecast.current.city.name}},
+    {{forecast.current.city.country}}</h1>
+  <div layout="row">
+    <div flex="33">
+      <md-list>
+        <md-subheader class="md-no-sticky">Week Forecast</md-subheader>
+        <md-list-item class="md-3-line" ng-repeat="weather in forecast.current.list">
+          <img class="md-avatar" ng-src="{{getWeatherImgUrl(weather.weather[0].icon)}}"/>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{getTime(weather.dt) | date: "dd MMM"}}</h3>
+            <h4>{{weather.temp.max | kelvinToDegree}}°C -
+              {{weather.temp.min | kelvinToDegree}}°C</h4>
+            <h4>{{weather.weather[0].description}}</h4>
+            <p>{{weather.speed}}
+              m/s
+              <br>
+              clouds:
+              {{weather.clouds}}%,
+              {{weather.pressure}}
+              hpa</p>
+          </div>
+        </md-list-item>
+      </md-list>
+    </div>
+    <div flex="66">
+      <forecast-chart dp="forecast.current"></forecast-chart>
+    </div>
+  </div>
+</div>
+<div layout="row">
+  <md-button class="md-raised" ng-href="#/search">Back to Search</md-button>
+  <md-button class="md-raised md-primary" ng-href="#/weather/{{forecast.current.id}}">Back to Details</md-button>
+</div>

@@ -1,0 +1,27 @@
+<search-box></search-box>
+<md-list>
+  <md-list-item class="md-2-line" ng-repeat="city in cities">
+    <img alt="{{city.name}}" class="md-avatar" ng-src="{{getWeatherImgUrl(city.weather[0].icon)}}"/>
+    <div class="md-list-item-text" layout="column">
+      <h3>
+        <a ng-href="#/weather/{{city.id}}">{{city.name}}, {{city.sys.country}}</a> <img ng-src="{{getCountryFlagImgUrl(city.sys.country)}}"/>
+      </h3>
+      <h4>{{city.weather[0].description}}</h4>
+      <p>
+        <md-button class="md-fab md-mini">
+           {{city.main.temp | kelvinToDegree}}°C
+       </md-button>
+        Temperature from
+        {{city.main.temp_min | kelvinToDegree}}
+        to
+        {{city.main.temp_max | kelvinToDegree}}°C, Wind
+        {{city.wind.speed}}m/s. Clouds
+        {{city.clouds.all}}%,
+        {{city.main.pressure}}hpa
+      </p>
+      <h4>
+        Geo coords <a ng-href="#/weather/{{city.id}}">[{{city.coord.lon}},{{city.coord.lat}}]</a>
+      </h4>
+    </div>
+  </md-list-item>
+</md-list>

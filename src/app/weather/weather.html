@@ -1,0 +1,49 @@
+<div layout="column">
+  <h2>{{weather.current.name}},
+    {{weather.current.sys.country}}</h2>
+  <h3><img ng-src="{{getWeatherImgUrl(weather.current.weather[0].icon)}}"/> {{weather.current.main.temp | kelvinToDegree}} &#8451;</h3>
+  <h4>{{weather.current.weather[0].main}}</h4>
+  <p>Got at: {{getTime(weather.current.dt) | date: 'dd MMMM yyyy HH:mm'}}</p>
+  <table>
+    <tbody>
+      <tr>
+        <td>Wind</td>
+        <td>Speed
+          {{weather.current.wind.speed}}
+          m/s</td>
+      </tr>
+      <tr>
+        <td>Cloudiness</td>
+        <td>{{weather.current.weather[0].description}}</td>
+      </tr>
+      <tr>
+        <td>Pressure</td>
+        <td>{{weather.current.main.pressure}}
+          hpa</td>
+      </tr>
+      <tr>
+        <td>Humidity</td>
+        <td>{{weather.current.main.humidity}}
+          %</td>
+      </tr>
+      <tr>
+        <td>Sunrise</td>
+        <td>{{getTime(weather.current.sys.sunrise) | date: 'HH:mm'}}</td>
+      </tr>
+      <tr>
+        <td>Sunset</td>
+        <td>{{getTime(weather.current.sys.sunset) | date: 'HH:mm'}}</td>
+      </tr>
+      <tr>
+        <td>Geo coords</td>
+        <td>[{{weather.current.coord.lon}},
+          {{weather.current.coord.lat}}]</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div layout="row">
+  <md-button class="md-raised" ng-href="#/search">Back to Search</md-button>
+  <md-button class="md-raised md-primary" ng-href="#/forecast/{{weather.current.id}}">Show Forecast</md-button>
+</div>
